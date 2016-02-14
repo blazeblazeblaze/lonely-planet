@@ -1,5 +1,5 @@
 output/
 
-./taxonomy.xml
-./destinatons.xml
-./big_data.xml
+taxonomy.xml
+big_data.xml
+destinations.xml
