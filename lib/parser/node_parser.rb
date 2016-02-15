@@ -2,7 +2,7 @@ require_relative 'base_parser'
 
 class NodeParser < BaseParser
   def parse
-    hashify_nodes([@handler.location_nodes])
+    hashify_nodes([@handler.nodes])
   end
 
   private

@@ -8,7 +8,7 @@ class DestinationParser < BaseParser
   private
 
   def hashify_nodes
-    @nodes = @handler.destination_nodes.reduce({}) do |acc, node|
+    @nodes = @handler.nodes.reduce({}) do |acc, node|
       acc[node[:atlas_id]] = node
       acc
     end

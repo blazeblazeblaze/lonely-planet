@@ -1,10 +1,11 @@
 class DestinationHandler
-  attr_reader :destination_nodes, :destination_stack
+  attr_reader :nodes, :stack
+  ATTRS_TO_PARSE = [:title, :atlas_id]
 
  def initialize
-    @key               = nil
-    @destination_nodes = nil
-    @destination_stack = []
+    @key   = nil
+    @nodes = {}
+    @stack = []
   end
 
   def cdata(str)
@@ -12,7 +13,7 @@ class DestinationHandler
   end
 
   def attr(name, value)
-    return unless [:title, :atlas_id].include? name
+    return unless ATTRS_TO_PARSE.include? name
 
     @key = name
     append(value)
@@ -31,24 +32,26 @@ class DestinationHandler
 
   def new_element(el)
     append(el)
-    @destination_stack.push(el)
+    @stack.push(el)
   end
 
   def end_element(name)
     return unless :destination == name
-    @destination_stack.pop
+    @stack.pop
   end
 
   def append(value)
-    last = @destination_stack.last
-
-    if last.is_a?(Hash)
-      last[@key] = value
+    if last_node.is_a?(Hash)
+      last_node[@key] = value
       @key = nil
-    elsif last.is_a?(Array)
-      last.push(value)
-    elsif last.nil?
-      @destination_nodes = value
+    elsif last_node.is_a?(Array)
+      last_node.push(value)
+    elsif last_node.nil?
+      @nodes = value
     end
+  end
+
+  def last_node
+    @stack.last
   end
 end

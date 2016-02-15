@@ -1,39 +1,44 @@
 class NodeHandler
-  attr_reader :location_nodes, :node_stack
+  attr_reader :nodes, :stack
+  ATTRS_TO_PARSE = [:atlas_node_id]
 
   def initialize
-    @location_nodes  = []
-    @node_stack      = []
+    @nodes  = []
+    @stack  = []
   end
 
   def attr(name, value)
-    return unless name == :atlas_node_id
+    return unless ATTRS_TO_PARSE.include? name
 
     append(value)
   end
 
   def start_element(name)
-    return unless name == :node
+    case name
+    when :node
+      new_element([])
+    end
+  end
 
-    new_elem = Array.new
-    append(new_elem)
-    @node_stack.push(new_elem)
+   def new_element(el)
+    append(el)
+    @stack.push(el)
   end
 
   def end_element(name)
     return unless name == :node
-    @node_stack.pop
+    @stack.pop
   end
 
   def append(value)
     if last_node.is_a?(Array)
       last_node.push(value)
     elsif last_node.is_a?(NilClass)
-      @location_nodes = value
+      @nodes = value
     end
   end
 
   def last_node
-    @node_stack.last
+    @stack.last
   end
 end
