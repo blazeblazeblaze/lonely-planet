@@ -16,11 +16,11 @@ describe NodeParser do
     let(:raw_locations) { ["355064",["355611", ["355612"]]] }
 
     before do
-      allow(handler).to receive(:location_nodes) { raw_locations }
+      allow(handler).to receive(:nodes) { raw_locations }
     end
 
     it 'hashifies xml' do
-      expect(handler).to receive(:location_nodes)
+      expect(handler).to receive(:nodes)
       subject.parse
     end
 

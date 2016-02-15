@@ -1,5 +1,9 @@
+require 'forwardable'
+
 class Destination
+  extend Forwardable
   attr_reader :destination_item, :destination_list
+  def_delegator :@destination_item, :[]
 
   def initialize(destination_item, destination_list)
     @destination_item = destination_item
@@ -7,22 +11,10 @@ class Destination
   end
 
   def parent
-    destination_list.parent_for(atlas_id)
+    destination_list.parent_for(destination_item[:atlas_id])
   end
 
   def children
-    destination_list.children_for(atlas_id)
-  end
-
-  def title
-    destination_item[:title]
-  end
-
-  def atlas_id
-    destination_item[:atlas_id]
-  end
-
-  def history
-    destination_item[:history]
+    destination_list.children_for(destination_item[:atlas_id])
   end
 end

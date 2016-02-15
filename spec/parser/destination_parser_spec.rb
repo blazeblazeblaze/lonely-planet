@@ -15,11 +15,11 @@ describe DestinationParser do
   describe '#parse' do
     let(:node_item) { { atlas_id: 123 } }
     before do
-      allow(handler).to receive(:destination_nodes) { [node_item] }
+      allow(handler).to receive(:nodes) { [node_item] }
     end
 
     it 'hashifies xml' do
-      expect(handler).to receive(:destination_nodes)
+      expect(handler).to receive(:nodes)
       subject.parse
     end
 

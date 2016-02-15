@@ -6,21 +6,21 @@ describe ViewModels::DestinationPage do
 
   describe '#title' do
     it 'delegates title do destination' do
-      expect(destination).to receive(:title)
+      expect(destination).to receive(:[]).with(:title)
       subject.title
     end
   end
 
   describe '#content' do
     it 'delegates content (history) do destination' do
-      expect(destination).to receive(:history)
+      expect(destination).to receive(:[]).twice
       subject.content
     end
   end
 
   describe '#atlas_id' do
     it 'delegates atlas_id do destination' do
-      expect(destination).to receive(:atlas_id)
+      expect(destination).to receive(:[]).with(:atlas_id)
       subject.atlas_id
     end
   end

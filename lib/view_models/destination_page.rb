@@ -7,15 +7,18 @@ module ViewModels
     end
 
     def title
-      destination.title
+      destination[:title]
     end
 
     def content
-      destination.history
+      {
+        history:  destination[:history],
+        overview: destination[:overview]
+      }
     end
 
     def atlas_id
-      destination.atlas_id
+      destination[:atlas_id]
     end
 
     def children
@@ -40,8 +43,8 @@ module ViewModels
 
     def nav_link(item)
       {
-        title:    item.title,
-        atlas_id: item.atlas_id
+        title:    item[:title],
+        atlas_id: item[:atlas_id]
       }
     end
   end

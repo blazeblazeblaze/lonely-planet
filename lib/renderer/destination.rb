@@ -26,7 +26,9 @@ module Renderer
               <h3>Navigation</h3>
               <div class='content'>
                 <div class='inner'>
-                  #{parent}
+                  <ul>
+                    #{navigation}
+                  </ul>
                 </div>
               </div>
             </div>
@@ -36,7 +38,7 @@ module Renderer
             <div class='block'>
               <div class='secondary-navigation'>
                 <ul>
-                  #{navigation}
+                  #{parent}
                 </ul>
                 <div class='clear'></div>
               </div>
@@ -64,9 +66,9 @@ module Renderer
       return unless view_model.parents
 
       view_model.parents.map do |parent|
-        "<a href='#{parent[:atlas_id]}.html'>
+        "<li><a href='#{parent[:atlas_id]}.html'>
           #{parent[:title]}
-        </a> > "
+        </a></li>"
       end.join
     end
 
@@ -74,12 +76,27 @@ module Renderer
       return unless view_model.children
 
       view_model.children.map do |child|
-        "<li><a href='#{child[:atlas_id]}.html'>#{child[:title]}</a><li>"
+        <<-HTML
+          <li><a href='#{child[:atlas_id]}.html'>#{child[:title]}</a></li>
+        HTML
       end.join
     end
 
     def content
-      view_model.content
+      <<-HTML
+        <div>
+          #{paragraph_with(view_model.content[:overview])}
+          <hr>
+          #{paragraph_with(view_model.content[:history])}
+        </div>
+      HTML
+    end
+
+    def paragraph_with(content)
+      return unless content
+      <<-HTML
+        <p>#{content}</p>
+      HTML
     end
   end
 end
