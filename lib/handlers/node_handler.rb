@@ -15,12 +15,14 @@ class NodeHandler
 
   def start_element(name)
     case name
-    when :node
+    when :taxonomies
       new_element([])
+    when :node
+      new_element({})
     end
   end
 
-   def new_element(el)
+  def new_element(el)
     append(el)
     @stack.push(el)
   end
