@@ -1,14 +1,21 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    builder (3.2.2)
     coderay (1.1.0)
     diff-lcs (1.2.5)
     method_source (0.8.2)
+    mini_portile2 (2.0.0)
+    nokogiri (1.6.7.2)
+      mini_portile2 (~> 2.0.0.rc2)
     ox (2.2.4)
     pry (0.10.3)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
       slop (~> 3.4)
+    rslt (1.1.10)
+      builder
+      nokogiri
     rspec (3.4.0)
       rspec-core (~> 3.4.0)
       rspec-expectations (~> 3.4.0)
@@ -30,6 +37,7 @@ PLATFORMS
 DEPENDENCIES
   ox
   pry
+  rslt
   rspec
 
 BUNDLED WITH
