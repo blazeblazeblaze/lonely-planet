@@ -1,5 +1,5 @@
 require './lib/parser/node_parser'
-require './lib/parser/destination_parser'
+require './lib/parser/destination_list_parser'
 
 require './lib/handlers/node_handler'
 require './lib/handlers/destination_handler'
@@ -34,10 +34,7 @@ class AppData
 
   def destinations_nodes
     Thread.new do
-      parser = DestinationParser.new(xml: @des_file, handler: DestinationHandler.new)
-      parser.parse
-
-      @destinations = parser.nodes
+      @destinations = DestinationListParser.parse(@des_file).destinations
     end
   end
 

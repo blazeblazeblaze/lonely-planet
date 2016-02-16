@@ -1,9 +1,19 @@
+GIT
+  remote: git://github.com/dropstream/sax-machine.git
+  revision: c61d41f8bf9efeed833701cc3bb138ec0c7a8583
+  specs:
+    sax-machine (0.0.18)
+      nokogiri (> 0.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
     coderay (1.1.0)
     diff-lcs (1.2.5)
     method_source (0.8.2)
+    mini_portile2 (2.0.0)
+    nokogiri (1.6.7.2)
+      mini_portile2 (~> 2.0.0.rc2)
     ox (2.2.4)
     pry (0.10.3)
       coderay (~> 1.1.0)
@@ -31,6 +41,7 @@ DEPENDENCIES
   ox
   pry
   rspec
+  sax-machine!
 
 BUNDLED WITH
    1.11.2

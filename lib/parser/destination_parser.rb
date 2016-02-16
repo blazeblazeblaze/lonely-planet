@@ -1,16 +1,11 @@
-require_relative 'base_parser'
+require 'sax-machine'
 
-class DestinationParser < BaseParser
-  def parse
-    hashify_nodes
-  end
+class DestinationParser
+  include SAXMachine
 
-  private
+  attribute :atlas_id
+  attribute :title
 
-  def hashify_nodes
-    @nodes = @handler.nodes.reduce({}) do |acc, node|
-      acc[node[:atlas_id]] = node
-      acc
-    end
-  end
+  element :overview
+  elements :history, as: :history
 end

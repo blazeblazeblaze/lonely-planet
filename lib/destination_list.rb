@@ -9,9 +9,9 @@ class DestinationList
   end
 
   def destinations
-    @_destinations ||= raw_destinations.inject({}) do |destination, (k, v)|
-      destination[k] = Destination.new(v, self)
-      destination
+    @_destinations ||= raw_destinations.reduce({}) do |acc, raw_destination|
+      acc[raw_destination.atlas_id] = Destination.new(raw_destination, self)
+      acc
     end
   end
 
